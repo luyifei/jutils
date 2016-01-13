@@ -1,18 +1,64 @@
 package com.os.jutils;
 
-import java.text.SimpleDateFormat;
+import java.sql.Timestamp;
+import java.text.ParseException;
 import java.util.Date;
+
+import org.junit.Test;
 
 public class DateUtilsTest {
 
-	private static final String YYYYMMDD_hhmmss = "YYYY-MM-DD hh:mm:ss";
-
-	public static String dateFormat(Date date, String formatString) {
-		SimpleDateFormat sdf = getSimpleDateFormat(formatString);
-		return sdf.format(date);
+	@Test
+	public void dateFormatTest() {
+		System.out.println(DateUtils.timeFormat(new Date(), DateUtils.YYYYMMDD_HHMMSS_CHINESE));
 	}
 
-	private static SimpleDateFormat getSimpleDateFormat(String formatString) {
-		return new SimpleDateFormat(formatString);
+	@Test
+	public void timestampFormatTest() {
+		System.out.println(DateUtils.timeFormat(new Timestamp(System.currentTimeMillis()), DateUtils.YYYYMMDD_HHMMSS));
+	}
+	
+	@Test
+	public void getDateFixedTest(){
+		System.out.println(DateUtils.getYYYYMMDD(new Date()));
+		System.out.println(DateUtils.getYYYYMMDD_HHMMSS(new Date()));
+	}
+	
+	@Test
+	public void getTimestampFixedTest(){
+		System.out.println(DateUtils.getYYYYMMDD(new Timestamp(System.currentTimeMillis())));
+		System.out.println(DateUtils.getYYYYMMDD_HHMMSS(new Timestamp(System.currentTimeMillis())));
+	}
+	
+	@Test
+	public void dateToTimestampTest(){
+		System.out.println(new Date());
+		System.out.println(DateUtils.dateToTimestamp(new Date()));
+	}
+	
+	@Test
+	public void timestampToDateTest(){
+		System.out.println(new Timestamp(System.currentTimeMillis()));
+		System.out.println(DateUtils.timestampToDate(new Timestamp(System.currentTimeMillis())));
+	}
+	
+	@Test
+	public void stringToDateTest(){
+		try {
+			System.out.println(DateUtils.stringToDate("2016-01-13 14:09:27", DateUtils.YYYYMMDD_HHMMSS));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	public void stringToTimestampTest(){
+		try {
+			System.out.println(DateUtils.stringToTimestamp("2016-01-13 14:09:27", DateUtils.YYYYMMDD_HHMMSS));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

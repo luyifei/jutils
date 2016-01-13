@@ -13,4 +13,8 @@ public class StringUtils {
 		}
 		return str;
 	}
+	
+	public static void main(String[] args) {
+	}
+	
 }

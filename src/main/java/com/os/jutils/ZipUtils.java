@@ -10,6 +10,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
 public class ZipUtils {
+	//http://snowolf.iteye.com/blog/465433
 	public static final String EXT = ".zip";
 	private static final String BASE_DIR = "";
 

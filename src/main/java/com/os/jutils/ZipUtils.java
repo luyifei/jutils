@@ -9,39 +9,46 @@ import java.util.zip.CheckedOutputStream;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+/**
+ * 
+ * @author finnick Zip压缩工具类，根据源文件、目标文件以及源目录和目标目录进行压缩文件
+ *
+ */
 public class ZipUtils {
-	//http://snowolf.iteye.com/blog/465433
+	// http://snowolf.iteye.com/blog/465433
+	// 文件压缩后缀
 	public static final String EXT = ".zip";
 	private static final String BASE_DIR = "";
 
 	// 符号"/"用来作为目录标识判断符
 	private static final String PATH = File.separator;
+	// 缓存数组大小
 	private static final int BUFFER = 1024;
 
 	/**
 	 * 压缩
 	 * 
 	 * @param srcFile
+	 *            源文件
 	 * @throws Exception
 	 */
 	public static void compress(File srcFile) throws Exception {
 		String name = srcFile.getName();
-		String basePath = srcFile.getParent();
-		String destPath = basePath + name + EXT;
-		compress(srcFile, destPath);
+		String destPath = srcFile.getParent();
+		compress(srcFile, destPath, name);
 	}
 
 	/**
 	 * 压缩
 	 * 
 	 * @param srcFile
-	 *            源路径
+	 *            源文件
 	 * @param destPath
-	 *            目标路径
+	 *            目标文件
 	 * @throws Exception
 	 */
 	public static void compress(File srcFile, File destFile) throws Exception {
-		System.out.println(destFile.getPath());
+
 		// 对输出文件做CRC32校验
 		CheckedOutputStream cos = new CheckedOutputStream(new FileOutputStream(destFile), new CRC32());
 
@@ -57,36 +64,26 @@ public class ZipUtils {
 	 * 压缩文件
 	 * 
 	 * @param srcFile
+	 *            源文件
 	 * @param destPath
+	 *            目标文件路径
+	 * @param fileName
+	 *            目标文件名
 	 * @throws Exception
 	 */
-	public static void compress(File srcFile, String destPath) throws Exception {
-		compress(srcFile, new File(destPath));
-	}
-
-	/**
-	 * 压缩
-	 * 
-	 * @param srcFile
-	 *            源路径
-	 * @param zos
-	 *            ZipOutputStream
-	 * @param basePath
-	 *            压缩包内相对路径
-	 * @throws Exception
-	 */
-	private static void compress(File srcFile, ZipOutputStream zos, String basePath) throws Exception {
-		if (srcFile.isDirectory()) {
-			compressDir(srcFile, zos, basePath);
-		} else {
-			compressFile(srcFile, zos, basePath);
+	public static void compress(File srcFile, String destPath, String fileName) throws Exception {
+		if (!destPath.endsWith(File.separator)) {
+			destPath = destPath + File.separator;
 		}
+		String destFilePath = destPath + fileName + EXT;
+		compress(srcFile, new File(destFilePath));
 	}
 
 	/**
 	 * 压缩
 	 * 
 	 * @param srcPath
+	 *            源文件路径
 	 * @throws Exception
 	 */
 	public static void compress(String srcPath) throws Exception {
@@ -102,12 +99,21 @@ public class ZipUtils {
 	 *            源文件路径
 	 * @param destPath
 	 *            目标文件路径
-	 * 
+	 * @param fileName
+	 *            目标文件名
+	 * @throws Exception
 	 */
-	public static void compress(String srcPath, String destPath) throws Exception {
+	public static void compress(String srcPath, String destPath, String fileName) throws Exception {
 		File srcFile = new File(srcPath);
+		compress(srcFile, destPath, fileName);
+	}
 
-		compress(srcFile, destPath);
+	private static void compress(File srcFile, ZipOutputStream zos, String basePath) throws Exception {
+		if (srcFile.isDirectory()) {
+			compressDir(srcFile, zos, basePath);
+		} else {
+			compressFile(srcFile, zos, basePath);
+		}
 	}
 
 	/**
@@ -121,21 +127,20 @@ public class ZipUtils {
 	private static void compressDir(File dir, ZipOutputStream zos, String basePath) throws Exception {
 
 		File[] files = dir.listFiles();
-		if (files != null) {
-			// 构建空目录
-			if (files.length < 1) {
-				ZipEntry entry = new ZipEntry(basePath + dir.getName() + PATH);
 
-				zos.putNextEntry(entry);
-				zos.closeEntry();
-			}
+		// 构建空目录
+		if (files.length < 1) {
+			ZipEntry entry = new ZipEntry(basePath + dir.getName() + PATH);
 
-			for (File file : files) {
+			zos.putNextEntry(entry);
+			zos.closeEntry();
+		}
 
-				// 递归压缩
-				compress(file, zos, basePath + dir.getName() + PATH);
+		for (File file : files) {
 
-			}
+			// 递归压缩
+			compress(file, zos, basePath + dir.getName() + PATH);
+
 		}
 	}
 
@@ -156,7 +161,6 @@ public class ZipUtils {
 		 * 压缩包内文件名定义
 		 * 
 		 * <pre>
-		 *  
 		 * 如果有多级目录，那么这里就需要给出包含目录的文件名 
 		 * 如果用WinRAR打开压缩包，中文名将显示为乱码
 		 * </pre>

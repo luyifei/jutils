@@ -135,4 +135,18 @@ public class StringUtils {
 		return obj == null ? replaceStr : obj.toString();
 	}
 
+	/**
+	 * 反转字符串
+	 * 
+	 * @param str
+	 *            源字符串
+	 * @return String
+	 */
+	public static String reverse(String str) {
+		if (isEmpty(str)) {
+			return str;
+		}
+		return new StringBuilder(str).reverse().toString();
+	}
+
 }

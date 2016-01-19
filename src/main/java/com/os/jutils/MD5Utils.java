@@ -85,8 +85,4 @@ public class MD5Utils {
 		}
 		return md5str.toString().toUpperCase();
 	}
-
-	public static void main(String[] args) throws IOException {
-		System.out.println(encrypt(new File("E:\\安装介质\\新建文件夹\\123.zip")));
-	}
 }

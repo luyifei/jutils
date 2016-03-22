@@ -12,9 +12,9 @@ import java.io.Serializable;
 public class SerializationUtils {
 	private static String FILE_NAME = "c:/obj.bin";
 
-	public static void writeObject(Serializable s) {
+	public static void writeObject(FileOutputStream fos, Serializable s) {
 		try {
-			ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(FILE_NAME));
+			ObjectOutputStream oos = new ObjectOutputStream(fos);
 			oos.writeObject(s);
 			oos.close();
 		} catch (FileNotFoundException e) {
@@ -26,12 +26,13 @@ public class SerializationUtils {
 		}
 	}
 
-	public static <T> T readObject(Class<T> entityClass) {
-		//Class clazz
+	@SuppressWarnings("unchecked")
+	public static <T> T readObject(FileInputStream fis, Class<T> entityClass) {
+		// Class clazz
 		T obj = null;
 		try {
-			ObjectInput oi = new ObjectInputStream(new FileInputStream(FILE_NAME));
-			obj =  (T) oi.readObject();
+			ObjectInput oi = new ObjectInputStream(fis);
+			obj = (T) oi.readObject();
 			oi.close();
 		} catch (Exception e) {
 			e.printStackTrace();

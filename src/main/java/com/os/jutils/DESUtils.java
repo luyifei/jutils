@@ -16,10 +16,17 @@ import sun.misc.BASE64Encoder;
  * 其中Key为8个字节共64位，是DES算法的工作密钥；Data也为8个字节64位，是要被加密或被解密的数据；Mode为DES的工作方式，
  * 有两种：加密或解密
  * 
- * @author finnick 。
+ * @author finnick
  */
 public class DESUtils {
 	private final static String DES = "DES";
+
+	/**
+	 * 私有化构造方法
+	 */
+	private DESUtils() {
+		throw new Error("禁止实例化！");
+	}
 
 	/**
 	 * 根据键值进行加密
@@ -31,7 +38,6 @@ public class DESUtils {
 	 * @return 加密后的字符串
 	 */
 	public static String encrypt(String data, String key) throws Exception {
-		// TODO
 		if (data == null) {
 			throw new IllegalArgumentException("data为null");
 		}

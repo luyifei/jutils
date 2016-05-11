@@ -1,6 +1,9 @@
 package com.os.jutils;
 
 public class StringUtils {
+	private StringUtils(){
+		throw new Error("禁止实例化！");
+	}
 	/**
 	 * null转化为空字符串
 	 * 

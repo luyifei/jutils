@@ -15,6 +15,12 @@ import java.io.OutputStream;
  *
  */
 public class FileUtils {
+	/**
+	 * 私有化构造函数
+	 */
+	private FileUtils() {
+		throw new Error("禁止实例化！");
+	}
 
 	/**
 	 * 删除指定文件(不包括文件夹)

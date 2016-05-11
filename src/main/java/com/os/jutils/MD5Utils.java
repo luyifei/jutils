@@ -19,7 +19,9 @@ public class MD5Utils {
 			nsaex.printStackTrace();
 		}
 	}
-
+	private MD5Utils(){
+		
+	}
 	/**
 	 * 对字符串进行MD5加密
 	 * 

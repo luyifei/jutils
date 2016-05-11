@@ -14,6 +14,12 @@ import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
 public class PropertiesUtils {
+	/**
+	 * 私有化构造方法
+	 */
+	private PropertiesUtils() {
+		throw new Error("禁止实例化！");
+	}
 
 	/**
 	 * 指定properties文件获取对应key键的value值
@@ -57,13 +63,14 @@ public class PropertiesUtils {
 
 	/**
 	 * 写入键值对到properties文件中，功能未能实现
+	 * 
 	 * @param resource
 	 * @param key
 	 * @param value
 	 * @throws IOException
 	 */
 	public static void writeProperties(String resource, String key, String value) throws IOException {
-		//TODO 貌似功能没有生效
+		// TODO 貌似功能没有生效
 		InputStream is = ClassLoader.getSystemResourceAsStream(resource);
 		Properties properties = new Properties();
 		try {
@@ -83,9 +90,10 @@ public class PropertiesUtils {
 		out.close();
 		is.close();
 	}
-	
+
 	/**
 	 * 加载指定的文件
+	 * 
 	 * @param resource
 	 * @return
 	 * @throws IOException

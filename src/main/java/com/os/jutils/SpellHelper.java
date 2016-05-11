@@ -8,6 +8,9 @@ import net.sourceforge.pinyin4j.format.HanyuPinyinVCharType;
 import net.sourceforge.pinyin4j.format.exception.BadHanyuPinyinOutputFormatCombination;
 
 public class SpellHelper {
+	private SpellHelper(){
+		throw new Error("禁止实例化！");
+	}
 	/**
 	 * 中文字符转化为拼音
 	 * 

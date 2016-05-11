@@ -25,6 +25,13 @@ public class DateUtils {
 	public static final String YYYYMMDD_CHINESE = "YYYY年MM月dd日";
 
 	/**
+	 * 构造方法私有化
+	 */
+	private DateUtils() {
+		throw new Error("禁止实例化！");
+	}
+
+	/**
 	 * 指定格式格式化时间
 	 * 
 	 * @param date

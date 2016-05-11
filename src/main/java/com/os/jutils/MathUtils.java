@@ -3,6 +3,12 @@ package com.os.jutils;
 import java.math.BigDecimal;
 
 public class MathUtils {
+	/**
+	 * 私有化构造方法
+	 */
+	private MathUtils() {
+		throw new Error("禁止实例化！");
+	}
 
 	/**
 	 * 将字符串转化为int，如果失败返回默认值。

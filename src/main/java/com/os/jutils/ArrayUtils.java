@@ -4,9 +4,10 @@ public final class ArrayUtils {
 	/**
 	 * 让工具类不可实例化
 	 */
-	private ArrayUtils(){
+	private ArrayUtils() {
 		throw new Error("禁止实例化！");
-	};
+	}
+
 	/**
 	 * 从数组中随机取一个对象返回
 	 * 

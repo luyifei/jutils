@@ -8,6 +8,12 @@ import java.io.Serializable;
 import org.apache.commons.io.output.ByteArrayOutputStream;
 
 public class CloneUtils {
+	/**
+	 * 构造方法私有化
+	 */
+	private CloneUtils() {
+		throw new Error("禁止实例化！");
+	}
 
 	/**
 	 * 对一个对象进行深度克隆,需要实现序列化接口(Apache下的commons工具包中的SerializationUtils类也实现该功能)

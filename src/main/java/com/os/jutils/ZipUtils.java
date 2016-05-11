@@ -29,6 +29,13 @@ public class ZipUtils {
 	private static final int BUFFER = 1024;
 
 	/**
+	 * 私有化构造方法
+	 */
+	private ZipUtils() {
+		throw new Error("禁止实例化！");
+	}
+
+	/**
 	 * 压缩
 	 * 
 	 * @param srcFile

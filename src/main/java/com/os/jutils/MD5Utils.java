@@ -19,9 +19,11 @@ public class MD5Utils {
 			nsaex.printStackTrace();
 		}
 	}
-	private MD5Utils(){
-		
+
+	private MD5Utils() {
+
 	}
+
 	/**
 	 * 对字符串进行MD5加密
 	 * 
@@ -34,6 +36,26 @@ public class MD5Utils {
 			throw new IllegalArgumentException("str不能为null");
 		}
 		return bytesToHex(md5.digest(str.getBytes()));
+	}
+
+	/**
+	 * 对字符串进行盐值MD5加密
+	 * 
+	 * @param str
+	 *            源字符串
+	 * @param salt
+	 *            盐值
+	 * @return 加密后字符串
+	 */
+	public static String encrypt(String str, String salt) {
+		if (str == null) {
+			throw new IllegalArgumentException("str不能为null");
+		}
+		if (salt == null) {
+			throw new IllegalArgumentException("salt不能为null");
+		}
+		str = str + salt;
+		return encrypt(str);
 	}
 
 	/**

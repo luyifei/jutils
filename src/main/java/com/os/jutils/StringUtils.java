@@ -1,5 +1,7 @@
 package com.os.jutils;
 
+import java.math.BigDecimal;
+
 public class StringUtils {
 	private StringUtils(){
 		throw new Error("禁止实例化！");
@@ -151,5 +153,21 @@ public class StringUtils {
 		}
 		return new StringBuilder(str).reverse().toString();
 	}
-
+	
+	/**
+	 * 比较字符串，忽略字母大小写
+	 * @param str1
+	 * @param str2
+	 * @return
+	 */
+	public static boolean equalsIgnoreCase(String str1,String str2){
+		if(str1==null && str2==null){
+			return true;
+		}
+		if (str1 == null){
+			return false;
+		}else{
+			return str1.equalsIgnoreCase(str2);
+		}
+	}
 }

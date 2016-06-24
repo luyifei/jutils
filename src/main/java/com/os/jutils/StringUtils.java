@@ -1,7 +1,5 @@
 package com.os.jutils;
 
-import java.math.BigDecimal;
-
 public class StringUtils {
 	private StringUtils(){
 		throw new Error("禁止实例化！");
@@ -31,6 +29,19 @@ public class StringUtils {
 			return true;
 		} else {
 			return "".equals(str.trim()) ? true : false;
+		}
+	}
+	
+	/**
+	 * 判断字符串是否为null
+	 * @param str 校验字符串
+	 * @return boolean
+	 */
+	public static boolean isNull(String str){
+		if (str == null) {
+			return true;
+		}else{
+			return false;
 		}
 	}
 

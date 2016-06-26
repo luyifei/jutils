@@ -1,6 +1,7 @@
 package com.os.jutils;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -99,7 +100,9 @@ public class PropertiesUtils {
 	 * @throws IOException
 	 */
 	private static Properties loadProperties(String resource) throws IOException {
-		InputStream is = ClassLoader.getSystemResourceAsStream(resource);
+		String classPath = Thread.currentThread().getContextClassLoader().getResource("").getPath();
+		resource = classPath.concat(resource);
+		InputStream is = new FileInputStream(resource);
 		Properties properties = new Properties();
 		try {
 			properties.load(is);
@@ -111,7 +114,10 @@ public class PropertiesUtils {
 	}
 
 	public static void main(String[] args) throws FileNotFoundException, IOException {
-		System.out.println(PropertiesUtils.getValue("test/person.properties", "name"));
+		//Properties props =  new Properties();
+		//props.load(new FileInputStream("src/main/java/dbconfig.properties"));
+		//System.out.println(props.getProperty("username"));
+		System.out.println(PropertiesUtils.getValue("dbconfig.properties", "username"));
 		try {
 			TimeUnit.SECONDS.sleep(1);
 		} catch (InterruptedException e) {

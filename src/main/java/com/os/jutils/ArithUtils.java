@@ -4,7 +4,6 @@ import java.math.BigDecimal;
 
 public class ArithUtils {
 	private ArithUtils(){
-		
 	}
 	/**
 	 * 对double数据类型进行加法运算
